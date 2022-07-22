@@ -5,19 +5,19 @@ VERSION="1.4.3.4\nBot de Telegram en Bash traducido por uGeek"
 # Fork de 1.4.3.4 - uGeekPodcast
 
 # Ingrese el token BOT devuelto por BotFather
-TELEGRAMTOKEN="< Intruduce aquí el nº de Token >"
+TELEGRAMTOKEN="$TELTOKEN"
 
 # Ingrese el ID de usuario maestro para notificaciones de uso
-PERSONALID="< ID del usuario Maestro >" 
+PERSONALID="$TELID"
  
 # Directorio de usuarios (Ruta donde está nuestra carpeta .batbot en nuestro servidor, Raspberry,...)
-BATBOTUSR="/root/.batbot" 
+BATBOTUSR="/BaTbot/.batbot"
 
 # cree el archivo allowed_users especificando las ID de los usuarios autorizados para enviar los comandos. Una identificación por línea 
 ALLOWEDUSER=$BATBOTUSR/allowed_users
 
 # revisar nuevos mensajes cada X segundos:
-CHECKNEWMSG=5
+CHECKNEWMSG=1
 
 # Comandos
 # respete este formato: ["/ mi comando"] = '<comando del sistema>'
@@ -26,7 +26,7 @@ CHECKNEWMSG=5
 # usa la función / setcommands en BotFather
 
 declare -A botcommands=(
-	["/start"]='exec userlist @USERID:@FIRSTNAME@LASTNAME'
+  ["/start"]='exec userlist @USERID:@FIRSTNAME@LASTNAME'
 	["/myid"]='echo Tu ID es: @USERID'
 	["/myuser"]='echo Tu nombre de usuario es: @USERNAME'
 	["/ping ([a-zA-Z0-9]+)"]='echo Pong: @R1'
@@ -34,11 +34,8 @@ declare -A botcommands=(
 	["/add ([0-9]+)"]='exec admadduser @USERID @R1'
 	["/del ([0-9]+)"]='exec admdeluser @USERID @R1'
 	["/lista"]='exec admlistuser @USERID'
-	["/run (.*)"]="exec @R1"
-	["/docker_nginx_start"]="docker stop nginx"
-	["/docker_nginx_stop"]="docker start nginx"
-	["/menu"]="echo -e Bienvenido a Mi Bot\n/myid \n/myuser \n/uptime \n/run \n/ping \n\nDockers:\n/docker_nginx_start \n/docker_nginx_stop \n\n\n/menu"
-
+	["/shutdown"]="exec poweroff"
+	["/menu"]="echo -e Bienvenido a Mi Bot\n/myid \n/myuser \n/uptime \n/run \n/ping \n\nDockers:\n/start \n/restart \n/shutdown\n\n\n/menu"
 	
 )
 
@@ -115,7 +112,7 @@ while true; do
 		fi
 
 		if [[ $MSGID -ne 0 && $CHATID -ne 0 ]]; then
-			### comprobar si el usuario está autorizado 
+			### comprobar si el usuario está autorizado
 			UserAllowed=$(grep -x "${FROMID}" $ALLOWEDUSER |wc -l)
 			LASTMSGID=$(cat "${BOTID}.lastmsg")
 			FIRSTNAMEUTF8=$(echo -e "$FIRSTNAME")
@@ -141,7 +138,7 @@ while true; do
 							CMDORIG=${CMDORIG//@R3/${BASH_REMATCH[3]}}
 
 							if [[ $UserAllowed -eq 1 ]]; then
-								if [[ $FIRSTTIME -eq 1 || $DATEDIFF -gt 10 ]]; then
+								if [[ $FIRSTTIME -eq 1 || $DATEDIFF -gt 1000 ]]; then
 									echo "Mensaje antiguo, no hay respuesta del usuario"
 									curl -s -d "text=Mensaje antiguo&chat_id=${PERSONALID}" "https://api.telegram.org/bot${TELEGRAMTOKEN}/sendMessage" > /dev/null
 								else
