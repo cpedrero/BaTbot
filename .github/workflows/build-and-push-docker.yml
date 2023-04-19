@@ -25,9 +25,9 @@ jobs:
         context: .
         push: true
         tags: |
-          karsixp:latest
-          karsixp:${{ github.sha }}
-          karsixp:${{ env.DOCKER_TAG }}
+          karsixp/batbot:latest
+          karsixp/batbot:${{ github.sha }}
+          karsixp/batbot:${{ env.DOCKER_TAG }}
 
     - name: Create Git tag
       if: success()
