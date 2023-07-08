@@ -32,6 +32,10 @@ jobs:
           karsixp/batbot:latest
           karsixp/batbot:${{ github.sha }}
           karsixp/batbot:${{ env.DOCKER_TAG }}
+    - name: Set Git identity
+      run: |
+        git config --global user.name "karsixp"
+        git config --global user.email "karsixp@protonmail.com"
     - name: Create Git tag
       if: success()
       run: git tag -a ${{ env.DOCKER_TAG }} -m "Tagging release version ${{ env.DOCKER_TAG }}"
