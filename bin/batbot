@@ -39,6 +39,7 @@ declare -A botcommands=(
 	
 )
 
+
 FIRSTTIME=0
 
 echo -e "\nBaTbot v${VERSION}\n"
