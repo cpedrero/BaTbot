@@ -39,5 +39,7 @@ jobs:
     - name: Create Git tag
       if: success()
       run: | 
-        git tag -a ${{ env.DOCKER_TAG }} -m "Tagging release version ${{ env.DOCKER_TAG }}"
-        git push origin ${{ env.DOCKER_TAG }}
+        git tag -a ${{ env.GIT_TAG }} -m "Tagging release version ${{ env.GIT_TAG }}"
+        git push origin ${{ env.GIT_TAG }}
+      env:
+        GIT_TAG: release-${{ env.DOCKER_TAG }}
