@@ -16,6 +16,7 @@ batbot es un BOT de Telegram simple escrito en Bash que puede responder a los me
 - mensajes de texto fijos analizador de expresiones regulares
 *** v1.4.1
 
+
 - caracteres fijos UTF-8 en nombre de usuario
  
 ** Índice
