@@ -39,5 +39,7 @@ jobs:
     - name: Create Git tag
       if: success()
       run: | 
-        git tag -a ${{ github.sha }} -m "Tagging release version ${{ github.ref }}"
-        git push origin ${{ github.sha }}
+        git tag -a ${{ GIT_TAG }} -m "Tagging release version ${{ GIT_TAG }}"
+        git push origin ${{ GIT_TAG }}
+      env:
+        GIT_TAG: release-${{ github.run_number }}
