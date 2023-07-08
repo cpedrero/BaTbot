@@ -9,13 +9,15 @@ env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   DOCKER_TAG: 1.1
-run: |
-  echo ${#DOCKER_USERNAME}
-  echo ${#DOCKER_PASSWORD}
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
+    - name: Check var
+      run: |
+        echo ${#DOCKER_USERNAME}
+        echo ${#DOCKER_PASSWORD}
     - name: Checkout
       uses: actions/checkout@v2
 
