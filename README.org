@@ -6,6 +6,7 @@ batbot es un BOT de Telegram simple escrito en Bash que puede responder a los me
 - Traducción al Castellano
 *** v1.4.3-ITA por eliafino
 
+
 - cambió la variable BOTPATH ​​en NMSGPATH y configure la ruta de guardado configurable. Tiene en cuenta los mensajes de texto no procesados ​​para los vecinos.
 - Lista agregada de usuarios aceptados "allowed_user" por @do2sz
 - Agrupa notifica al usuario maestro de los comandos enviados al BOT.
