@@ -36,7 +36,7 @@ declare -A botcommands=(
 	["/lista"]='exec admlistuser @USERID'
 	["/shutdown"]="exec ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /root/.ssh/id_rsa root@${HOST} shutdown -h now"
 	["/mount"]="exec systemctl restart colmenas-mount.service"
-	["/mount-status"]="exec systemctl status colmenas-mount.service"
+	["/mount_status"]="exec systemctl status colmenas-mount.service"
 	["/menu"]="echo -e Bienvenido a Mi Bot\n/myid \n/myuser \n/uptime \n/run \n/ping \n\nDockers:\n/start \n/restart \n/shutdown\n\n\n/menu"
 	
 )
