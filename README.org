@@ -1,3 +1,4 @@
+* BaTbot v1.6 - Mount colmenas
 * BaTbot v1.5 - Ssh shutdown with ssh calling to HOST variable. It is preferible to call localhost address to do the shutdown.
 * BaTbot v1.4.3.4 - Bash Telegram BOT
 batbot es un BOT de Telegram simple escrito en Bash que puede responder a los mensajes de los usuarios, ejecutar comandos y hacer otras cosas interesantes.
