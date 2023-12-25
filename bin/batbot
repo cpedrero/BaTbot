@@ -123,7 +123,7 @@ while true; do
 					echo "[chat ${CHATID}][da ${FROMID}] <${FIRSTNAMEUTF8} ${LASTNAME}> ${TEXT}"
 					echo $MSGID > "${BOTID}.lastmsg"
 					for s in "${!botcommands[@]}"; do
-						if [[ "$TEXT" =~ ${s} ]]; then
+						if [[ "$TEXT" = ${s} ]]; then
 							DATENOW=$(date "+%s")
 							DATEDIFF=$(( $DATENOW - $DATE ))
 							CMDORIG=${botcommands["$s"]}
