@@ -36,7 +36,7 @@ declare -A botcommands=(
 	["/lista"]='exec admlistuser @USERID'
 	["/shutdown"]='exec ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /root/.ssh/id_rsa root@${HOST} shutdown -h now'
 	["/mount"]='exec systemctl restart colmenas-mount.service'
-	["/mountstatus"]='exec systemctl status colmenas-mount.service'
+	["/mount_status"]='exec systemctl status colmenas-mount.service'
 	["/menu"]='echo -e Bienvenido a Mi Bot\n/myid \n/myuser \n/uptime \n/run \n/ping \n\nDockers:\n/start \n/restart \n/shutdown\n\n\n/menu'
 )
 
@@ -119,7 +119,7 @@ while true; do
 			LASTMSGID=$(cat "${BOTID}.lastmsg")
 			FIRSTNAMEUTF8=$(echo -e "$FIRSTNAME")
 			if [[ $MSGID -gt $LASTMSGID ]]; then
-				if grep -qe "$(echo $TEXT | awk '{print $1}')" <(echo "${!botcommands[@]}"); then
+				if grep -qw "$(echo $TEXT | awk '{print $1}')" <(echo "${!botcommands[@]}"); then
 					echo "[chat ${CHATID}][da ${FROMID}] <${FIRSTNAMEUTF8} ${LASTNAME}> ${TEXT}"
 					echo $MSGID > "${BOTID}.lastmsg"
 					for s in "${!botcommands[@]}"; do
