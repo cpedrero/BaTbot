@@ -39,8 +39,6 @@ declare -A botcommands=(
 	["/mount_status"]='exec systemctl status colmenas-mount.service 2>&1'
 	["/menu"]='echo -e Bienvenido a Mi Bot\n/myid \n/myuser \n/uptime \n/run \n/ping \n\nDockers:\n/start \n/restart \n/shutdown\n\n\n/menu'
 )
-
-
 FIRSTTIME=0
 
 echo -e "\nBaTbot v${VERSION}\n"
