@@ -143,7 +143,7 @@ while true; do
 									curl -s -d "text=Mensaje antiguo&chat_id=${PERSONALID}" "https://api.telegram.org/bot${TELEGRAMTOKEN}/sendMessage" > /dev/null
 								else
 									echo "Comando ${s} recibido, ejecuto: ${CMDORIG}"
-									result = subprocess.run($CMDORIG, shell=True, capture_output=True, text=True)
+									result = subprocess.run(`$CMDORIG`, shell=True, capture_output=True, text=True)
 									CMDOUTPUT = result.stdout + result.stderr
 									curl -s -d "text=${CMDOUTPUT}&chat_id=${CHATID}" "https://api.telegram.org/bot${TELEGRAMTOKEN}/sendMessage" > /dev/null
 									if [[ ${FROMID} != ${PERSONALID} ]]; then
