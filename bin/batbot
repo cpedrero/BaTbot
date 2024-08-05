@@ -34,9 +34,9 @@ declare -A botcommands=(
 	["/add ([0-9]+)"]='exec admadduser @USERID @R1'
 	["/del ([0-9]+)"]='exec admdeluser @USERID @R1'
 	["/lista"]='exec admlistuser @USERID'
-	["/shutdown"]="exec ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /root/.ssh/id_rsa root@${HOST} shutdown -h now"
-	["/mount"]='exec systemctl restart colmenas-mount.service 2>&1'
-	["/mount_status"]='exec systemctl status colmenas-mount.service 2>&1'
+	["/shutdown"]="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /root/.ssh/id_rsa root@${HOST} shutdown -h now"
+	["/mount"]='systemctl restart colmenas-mount.service 2>&1'
+	["/mount_status"]='systemctl status colmenas-mount.service 2>&1'
 	["/menu"]='echo -e Bienvenido a Mi Bot\n/myid \n/myuser \n/uptime \n/run \n/ping \n\nDockers:\n/start \n/restart \n/shutdown\n\n\n/menu'
 )
 FIRSTTIME=0
@@ -143,7 +143,7 @@ while true; do
 									curl -s -d "text=Mensaje antiguo&chat_id=${PERSONALID}" "https://api.telegram.org/bot${TELEGRAMTOKEN}/sendMessage" > /dev/null
 								else
 									echo "Comando ${s} recibido, ejecuto: ${CMDORIG}"
-									CMDOUTPUT=`$CMDORIG`
+									CMDOUTPUT=$(bash -c "$CMDORIG")
 									curl -s -d "text=${CMDOUTPUT}&chat_id=${CHATID}" "https://api.telegram.org/bot${TELEGRAMTOKEN}/sendMessage" > /dev/null
 									if [[ ${FROMID} != ${PERSONALID} ]]; then
 										curl -s -d "text=${s} recibido de ${FIRSTNAMEUTF8} ${LASTNAME} ${FROMID}&chat_id=${PERSONALID}" "https://api.telegram.org/bot${TELEGRAMTOKEN}/sendMessage" > /dev/null
