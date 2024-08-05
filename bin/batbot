@@ -34,9 +34,9 @@ declare -A botcommands=(
 	["/add ([0-9]+)"]='exec admadduser @USERID @R1'
 	["/del ([0-9]+)"]='exec admdeluser @USERID @R1'
 	["/lista"]='exec admlistuser @USERID'
-	["/shutdown"]='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /root/.ssh/id_rsa root@${HOST} shutdown -h now'
-	["/mount"]='systemctl restart colmenas-mount.service 2>&1'
-	["/mount_status"]='systemctl status colmenas-mount.service 2>&1'
+	["/shutdown"]='nohup ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /root/.ssh/id_rsa root@${HOST} shutdown -h now'
+	["/mount"]='nohup systemctl restart colmenas-mount.service 2>&1'
+	["/mount_status"]='nohup systemctl status colmenas-mount.service 2>&1'
 	["/menu"]='echo -e Bienvenido a Mi Bot\n/myid \n/myuser \n/uptime \n/run \n/ping \n\nDockers:\n/start \n/restart \n/shutdown\n\n\n/menu'
 )
 FIRSTTIME=0
